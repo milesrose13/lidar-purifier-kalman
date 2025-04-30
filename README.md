@@ -113,7 +113,7 @@ python ukf_lidar_noise_detector.py \
   Region-growing algorithm using a KD-tree to group points; labels unreachable points as noise.
 
 - **las_kalman_batch_noise_detector.py**  
-  Batch runner: sorts by `gps_time`, applies a 1D Kalman filter to ground-class elevations, and outputs both reclassified LAS files and a summary text file of noise percentages.
+  Batch runner: applies a 1D Kalman filter to ground-class elevations, and outputs both reclassified LAS files and a summary text file of noise percentages.
 
 - **ukf_lidar_noise_detector.py**  
   Applies an Unscented Kalman Filter on chunks of ground elevations; supports command-line tuning of UKF parameters.
