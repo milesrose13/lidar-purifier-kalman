@@ -172,7 +172,6 @@ Example path profile of Unscented Kalman Filter output using sloped input data, 
 ![ITD results Roof Classification](images/itd_roof_class_results.png)
 Generated roof class (pink) over ground/unclassified class (brown/green). You'll notice some tall vegetation was misclassified
 as roof, this could be avoided by masking a vegetation class (possibly using GeoWizard)
----
 
 ## Author & Acknowledgements
 
