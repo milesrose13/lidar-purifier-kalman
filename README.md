@@ -3,7 +3,7 @@
 This repository contains a set of command-line tools developed as a research project during
 my Software Developer Co-op at GeoBC, focused on identifying and classifying noise in airborne
 LiDAR datasets. The work explores region growing algorithms, classical Kalman filtering approaches and Unscented Kalman Filter (UKF)
-techniques to improve the quality of ground-class point clouds.
+techniques to improve the quality of ground-class point clouds, plus an ITD-based Roof Class generator.
 
 ---
 
