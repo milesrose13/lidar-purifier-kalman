@@ -3,7 +3,7 @@
 This repository contains a set of command-line tools developed as a research project during
 my Software Developer Co-op at GeoBC, focused on identifying and classifying noise in airborne
 LiDAR datasets. The work explores region growing algorithms, classical Kalman filtering approaches and Unscented Kalman Filter (UKF)
-techniques to improve the quality of ground-class point clouds.
+techniques to improve the quality of ground-class point clouds plus a script for roof classification using Intrinsic Time-Scale Decomposition (ITD).
 
 ---
 
@@ -16,6 +16,7 @@ techniques to improve the quality of ground-class point clouds.
     - [1. CloudFinder (Region-Growing)](#1-cloudfinder-region-growing)
     - [2. Kalman Filter Batch Processor](#2-kalman-filter-batch-processor)
     - [3. UKF-based Noise Detector](#3-ukf-based-noise-detector)
+    - [4. ITD-based Roof Class Generator](#4-itd-based-roof-class-generator)
 5. [Scripts & File Descriptions](#scripts--file-descriptions)
 6. [Configuration Options](#configuration-options)
 7. [Results & Outputs](#results--outputs)
@@ -32,6 +33,7 @@ During my co-op term at GeoBC, I investigated methods to automatically detect an
 - Rapidly identify clusters of valid ground returns vs. isolated noise points (e.g., birds, clouds, sensor artifacts).
 - Compare classical 1D Kalman filtering to more advanced UKF strategies for robust performance on hilly terrain.
 - Provide reusable, scalable command-line tools for processing large LAS/LAZ datasets.
+- Provide a roof classification tool by applying Intrinsic Time-scale Decomposition (ITD) on single-return points.
 
 ---
 
@@ -40,6 +42,8 @@ During my co-op term at GeoBC, I investigated methods to automatically detect an
 ```
 ├── images
 ├── cloudfinder.py
+├── ITD.py
+├── itd_roof_class_generator.py
 ├── las_kalman_batch_noise_detector.py
 ├── ukf_lidar_noise_detector.py
 ├── requirements.txt
@@ -105,6 +109,14 @@ python ukf_lidar_noise_detector.py \
   --measurement_noise_R 0.20
 ```
 
+### 4. ITD-based Roof Class Generator
+    Classifies roof points by applying ITD to single-return points, filtering by IMF1 values and height above ground:
+```bash
+python itd_roof_class_generator.py \
+  <input_las> <output_las> \
+  --percentile 100.0 \
+  --height_offset 2.0
+```
 ---
 
 ## Scripts & File Descriptions
@@ -118,6 +130,9 @@ python ukf_lidar_noise_detector.py \
 - **ukf_lidar_noise_detector.py**  
   Applies an Unscented Kalman Filter on chunks of ground elevations; supports command-line tuning of UKF parameters.
 
+- **itd_roof_class_generator.py** 
+
+   Uses Intrinsic Time-scale Decomposition (ITD) on single-return points to detect roof surfaces (class 6) by thresholding IMF1 values and applying a height filter.
 - **requirements.txt**  
   Lists all Python dependencies.
 
@@ -125,12 +140,13 @@ python ukf_lidar_noise_detector.py \
 
 ## Configuration Options
 
-All scripts offer flags for:
+Some scripts offer flags for:
 
 - **Grid size** (`--grid_size`) & **distance threshold** (`--distance_threshold`) for region growing.
 - **Noise threshold** (`--threshold`) for allowable deviation before flagging noise.
 - **Process noise (Q)** & **measurement noise (R)** variances for both Kalman and UKF filters.
 - **Chunk size** for parallel UKF processing.
+- **IMF percentile** (--percentile) & height offset (--height_offset) for roof detection.
 
 Customize these to match flight characteristics, terrain ruggedness, and point density.
 
@@ -153,7 +169,10 @@ Example path profile of CloudFinder output, with noise points coloured orange an
 ![UKF Results Path Profile](images/ukf_results_pathprofile.png)
 
 Example path profile of Unscented Kalman Filter output using sloped input data, with noise points highlighted in yellow and ground points coloured brown.
-
+ 
+![ITD results Roof Classification](images/itd_roof_class_results.png)
+Generated roof class (pink) over ground/unclassified class (brown/green). You'll notice some tall vegetation was misclassified
+as roof, this could be avoided by masking a vegetation class (possibly using GeoWizard)
 ---
 
 ## Author & Acknowledgements
