@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import laspy
 import numpy as np
 import time
