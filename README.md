@@ -16,6 +16,7 @@ techniques to improve the quality of ground-class point clouds.
     - [1. CloudFinder (Region-Growing)](#1-cloudfinder-region-growing)
     - [2. Kalman Filter Batch Processor](#2-kalman-filter-batch-processor)
     - [3. UKF-based Noise Detector](#3-ukf-based-noise-detector)
+    - [4. ITD-based Roof Class Generator](#4-itd-based-roof-class-generator)
 5. [Scripts & File Descriptions](#scripts--file-descriptions)
 6. [Configuration Options](#configuration-options)
 7. [Results & Outputs](#results--outputs)
