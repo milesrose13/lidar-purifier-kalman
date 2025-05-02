@@ -3,7 +3,7 @@
 This repository contains a set of command-line tools developed as a research project during
 my Software Developer Co-op at GeoBC, focused on identifying and classifying noise in airborne
 LiDAR datasets. The work explores region growing algorithms, classical Kalman filtering approaches and Unscented Kalman Filter (UKF)
-techniques to improve the quality of ground-class point clouds plus a script for roof classification using Intrinsic Time-Scale Decomposition (ITD).
+techniques to improve the quality of ground-class point clouds.
 
 ---
 
@@ -16,11 +16,9 @@ techniques to improve the quality of ground-class point clouds plus a script for
     - [1. CloudFinder (Region-Growing)](#1-cloudfinder-region-growing)
     - [2. Kalman Filter Batch Processor](#2-kalman-filter-batch-processor)
     - [3. UKF-based Noise Detector](#3-ukf-based-noise-detector)
-    - [4. ITD-based Roof Class Generator](#4-itd-based-roof-class-generator)
 5. [Scripts & File Descriptions](#scripts--file-descriptions)
 6. [Configuration Options](#configuration-options)
 7. [Results & Outputs](#results--outputs)
-8. [Contributing](#contributing)
 9. [License](#license)
 10. [Author & Acknowledgements](#author--acknowledgements)
 
